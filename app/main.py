@@ -38,6 +38,14 @@ class RAGEngine:
         else:
             raise ValueError("GENERATION_MODE must be 'local' or 'hosted'")
 
+        chandra = self.settings.chandra_path
+        if chandra and chandra.exists():
+            from app.ingestion.chandra_ingestor import ChandraIngestor
+
+            ingestor = ChandraIngestor(chandra)
+            for document in ingestor.iter_documents():
+                self.ingest(document.text, document.metadata.get("source", "chandra"), document.metadata)
+
     def ingest(self, text: str, source: str, metadata: dict | None = None) -> int:
         document_metadata = {"source": source, **(metadata or {})}
         chunks = chunk_document(
