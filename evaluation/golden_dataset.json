@@ -1,0 +1,12 @@
+[
+  {
+    "question": "How does the service handle a missing API key?",
+    "expected_sources": ["operations.md"],
+    "filters": {"team": "platform"}
+  },
+  {
+    "question": "Which metadata field identifies the owning team?",
+    "expected_sources": ["metadata-guide.md"],
+    "filters": {"team": "platform"}
+  }
+]
